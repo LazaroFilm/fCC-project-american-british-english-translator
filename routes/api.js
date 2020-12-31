@@ -11,7 +11,7 @@ module.exports = function (app) {
     // req.body => {text, locale}
     const text = req.body.text;
     const locale = req.body.locale;
-    const translation = translator.translate(text, locale);
+    const translation = translator.ab(text, locale);
     res.json({
       text,
       translation,
