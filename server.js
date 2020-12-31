@@ -3,6 +3,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const expect = require("chai").expect;
 const cors = require("cors");
+const chalk = require("chalk");
 
 const fccTestingRoutes = require("./routes/fcctesting.js");
 const runner = require("./test-runner");
@@ -37,7 +38,9 @@ const portNum = process.env.PORT || 3000;
 // Start our server and tests!
 app.listen(portNum, () => {
   console.clear();
-  console.log(`Listening on port ${portNum}`);
+  console.log(
+    chalk.bgYellow.black(`          Listening on port ${portNum}          `)
+  );
   if (process.env.NODE_ENV === "test") {
     console.log("Running Tests...");
     setTimeout(function () {
