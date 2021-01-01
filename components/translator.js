@@ -3,10 +3,6 @@ const americanOnly = require("./american-only.js");
 const americanToBritishSpelling = require("./american-to-british-spelling.js");
 const americanToBritishTitles = require("./american-to-british-titles.js");
 const britishOnly = require("./british-only.js");
-const chalk = require("chalk");
-const consoleRed = (...m) => console.log(chalk.red(...m));
-const consoleGreen = (...m) => console.log(chalk.green(...m));
-const consoleBlue = (...m) => console.log(chalk.blue(...m));
 
 class Translator {
   ab(text) {
@@ -30,7 +26,6 @@ class Translator {
 
   translate(translated, list) {
     for (const word in list) {
-      // const Word = this.capitalize(word);
       const bWord = list[word];
       const re = new RegExp(`(${word})(\\W)`, "ig");
       translated = translated.replace(re, (_, a, b) => {
