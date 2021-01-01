@@ -45,29 +45,43 @@ class Translator {
 
   ab(text, locale) {
     //iterate through each list and find if the string contains that string
-    let translated = text.toLowerCase(); //! this make American words lowercase, not good
+    let translated = text;
     for (const aWord in americanToBritishSpelling) {
-      // console.log(aWord);
-      while (translated.includes(aWord)) {
+      // Checking if the string still contains american words.
+      while (
+        translated
+          .toLowerCase()
+          .replace(`<span class="highlight">`, "")
+          .replace(`</span>`, "")
+          .includes(aWord)
+      ) {
         translated = this.translateAB(aWord, translated, text);
-        console.log(translated);
+        // console.log("translating", aWord);
       }
     }
     return translated;
-    // repeat this until all duplicated words are translated
   }
 
   translateAB(aWord, translated, text) {
-    const matched = translated.match(aWord);
+    const matched = translated.toLowerCase().match(aWord);
+    console.log(matched);
     if (matched) {
-      console.log("matched:", matched);
-      if (text[matched.index] === text[matched.index].toUpperCase()) {
+      //! This breaks after replacing the first word
+      //? index of text and translated don't match anymore
+      if (
+        translated[matched.index] === translated[matched.index].toUpperCase()
+      ) {
         return translated.replace(
-          aWord,
-          this.capitalize(americanToBritishSpelling[aWord])
+          this.capitalize(aWord),
+          `<span class="highlight">${this.capitalize(
+            americanToBritishSpelling[aWord]
+          )}</span>`
         );
       } else {
-        return translated.replace(aWord, americanToBritishSpelling[aWord]);
+        return translated.replace(
+          aWord,
+          `<span class="highlight">${americanToBritishSpelling[aWord]}</span>`
+        );
       }
     }
   }
