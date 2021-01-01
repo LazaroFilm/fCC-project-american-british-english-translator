@@ -1,6 +1,7 @@
 "use strict";
 
 const Translator = require("../components/translator.js");
+const chalk = require("chalk");
 
 module.exports = function (app) {
   const translator = new Translator();
@@ -11,10 +12,11 @@ module.exports = function (app) {
     // req.body => {text, locale}
     const text = req.body.text;
     const locale = req.body.locale;
-    const translation = translator.ab(text, locale);
-    res.json({
-      text,
-      translation,
-    });
+    const translation =
+      locale == "american-to-british"
+        ? translator.ab(text)
+        : translator.ba(text);
+    console.log("route:", translation);
+    res.json({ text, translation });
   });
 };
