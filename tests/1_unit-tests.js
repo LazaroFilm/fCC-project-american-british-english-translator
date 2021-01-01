@@ -6,7 +6,7 @@ const translator = new Translator();
 const re = new RegExp(`(<span class="highlight">)|(</span>)`, "g");
 
 suite(`Unit Tests`, () => {
-  suite(`to British English`, () => {
+  suite(`Translate to British English`, () => {
     test(`Translate Mangoes are my favorite fruit.`, () => {
       assert.equal(
         translator
@@ -93,6 +93,8 @@ suite(`Unit Tests`, () => {
         `Lunch is at 12.15`
       );
     });
+  });
+  suite(`Translate to American English`, () => {
     test(`We watched the footie match for a while.`, () => {
       assert.equal(
         translator
@@ -173,13 +175,9 @@ suite(`Unit Tests`, () => {
     });
     test(`Tea time is usually around 4 or 4.30.`, () => {
       assert.equal(
-        translator.ab(``, `british-to-american`).replace(re, ""),
-        ``
-      );
-    });
-    test(``, () => {
-      assert.equal(
-        translator.ab(``, `british-to-american`).replace(re, ""),
+        translator
+          .ab(`Tea time is usually around 4 or 4.30.`, `british-to-american`)
+          .replace(re, ""),
         ``
       );
     });
