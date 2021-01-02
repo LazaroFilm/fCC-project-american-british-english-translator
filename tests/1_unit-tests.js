@@ -114,7 +114,7 @@ suite(`Unit Tests`, () => {
     test(`I had a bicky then went to the chippy.`, () => {
       assert.equal(
         translator.ba(`I had a bicky then went to the chippy.`).replace(re, ""),
-        `I had a cookie then went to the fish-and-fish-and-chip shop.`
+        `I had a cookie then went to the fish-and-chip shop.`
       );
     });
     test(`I've just got bits and bobs in my bum bag.`, () => {

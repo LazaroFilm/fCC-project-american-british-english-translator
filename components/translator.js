@@ -44,22 +44,26 @@ class Translator {
     });
     for (const word of ordered) {
       const bWord = list[word];
-      const re = new RegExp(word, "ig");
+      const re = new RegExp(`${word}(?!\\w)`, "ig");
       // looks for word and replaces it
       translated = translated.replace(re, (match, index) => {
-        console.log(match[0]);
+        // console.log({ match });
         // checks if already translated
         if (
-          translated.substr(index - 24, index) === `<span class="highlight">`
+          translated.substr(index - 24, index) === `<span class="highlight">` ||
+          translated.substr(index + match.length, index + match.length + 7) ===
+            `</span>`
         ) {
           return match;
         } else {
-          return match[0] === this.capitalize(word[0])
+          // console.log(match[0]);
+          return match[0] === match[0].toUpperCase()
             ? `<span class="highlight">${this.capitalize(bWord)}</span>`
             : `<span class="highlight">${bWord}</span>`;
         }
       });
     }
+    // console.log({ translated });
     return translated;
   }
 
