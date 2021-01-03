@@ -6,8 +6,8 @@ module.exports = function (app) {
   const translator = new Translator();
 
   app.route("/api/translate").post((req, res) => {
-    console.log("_____POST/translate_____");
-    console.log(req.body);
+    // console.log("_____POST/translate_____");
+    // console.log(req.body);
     const text = req.body.text;
     const locale = req.body.locale;
     try {
@@ -22,10 +22,10 @@ module.exports = function (app) {
       if (text === translation) {
         translation = "Everything looks good to me!";
       }
-      console.log("translation:", translation);
+      // console.log("translation:", translation);
       res.json({ text, translation });
     } catch (error) {
-      console.log("error:", error);
+      // console.log("error:", error);
       res.json({ error });
     }
   });
